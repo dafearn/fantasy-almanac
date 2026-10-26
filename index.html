@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#16284a">
+  <title>League Almanac</title>
+  <meta name="description" content="A fantasy football almanac for any Sleeper league: live scoring, standings and playoff odds, power rankings, rivalries, records and weekly reports.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="League Almanac">
+  <meta property="og:title" content="League Almanac">
+  <meta property="og:description" content="Live scoring, power rankings, rivalries, a record book and weekly reports for your Sleeper fantasy league.">
+  <meta property="og:image" content="img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A league crest on a football field">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="img/og.png">
+  <link rel="preload" href="fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="img/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="img/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Almanac">
+  <link rel="stylesheet" href="css/app.css">
+  <script>
+    // Before first paint: the saved light/dark choice and colorway (js/look.js keeps them), so the page doesn't flash the defaults.
+    try {
+      const t = localStorage.getItem('almanac-theme'); if (t) document.documentElement.dataset.theme = t;
+      const c = JSON.parse(localStorage.getItem('almanac-colors') || 'null'), st = document.documentElement.style;
+      if (c) { st.setProperty('--brand', c.brand); st.setProperty('--trim', c.trim); st.setProperty('--accent-l', c.accentL); st.setProperty('--accent-d', c.accentD); }
+    } catch {}
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="nav" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a href="#/" class="tb-brand" aria-label="Home"><span id="tblogo"></span></a>
+    <span class="tb-title" id="tbTitle">League Almanac</span>
+    <a href="#/account" class="tb-acct" id="tbAcct">Sign in</a>
+  </header>
+  <div class="backdrop" id="backdrop" hidden></div>
+  <div class="layout">
+    <nav class="side" id="nav">
+      <div class="brand"><span id="brandlogo"></span><span><span id="brandname">League Almanac</span><small>League almanac</small></span></div>
+      <a href="#/">Home</a>
+      <div class="navgroup" data-g="season"><button type="button" class="navh" aria-expanded="true" aria-controls="ng-season">This season<span class="cnt">5</span></button>
+        <div class="navg" id="ng-season"><div>
+          <a href="#/live">Live</a>
+          <a href="#/standings">Standings &amp; odds</a>
+          <a href="#/power">Power rankings</a>
+          <a href="#/reports">Weekly reports</a>
+          <a href="#/scouting">Scouting reports</a>
+        </div></div></div>
+      <div class="navgroup" data-g="club"><button type="button" class="navh" aria-expanded="true" aria-controls="ng-club">Clubhouse<span class="cnt">4</span></button>
+        <div class="navg" id="ng-club"><div>
+          <a href="#/ask">Ask the Commish</a>
+          <a href="#/pickem">Pick'em</a>
+          <a href="#/block">Trade block</a>
+          <a href="#/cards">Trading cards</a>
+        </div></div></div>
+      <div class="navgroup" data-g="analysis"><button type="button" class="navh" aria-expanded="true" aria-controls="ng-analysis">Analysis<span class="cnt">7</span></button>
+        <div class="navg" id="ng-analysis"><div>
+          <a href="#/allplay">All-play</a>
+          <a href="#/luck">Schedule luck</a>
+          <a href="#/breakdown">Team breakdown</a>
+          <a href="#/trends">Trends</a>
+          <a href="#/charts">Charts</a>
+          <a href="#/receipts">The Receipts</a>
+          <a href="#/whatif">What-if lab</a>
+        </div></div></div>
+      <div class="navgroup" data-g="lore"><button type="button" class="navh" aria-expanded="true" aria-controls="ng-lore">League lore<span class="cnt">6</span></button>
+        <div class="navg" id="ng-lore"><div>
+          <a href="#/hof">Hall of Fame</a>
+          <a href="#/records">Record book</a>
+          <a href="#/trophies">Trophy room</a>
+          <a href="#/rivalries">Rivalries</a>
+          <a href="#/allleague">All-League teams</a>
+          <a href="#/history">History</a>
+        </div></div></div>
+      <div class="navgroup" data-g="people"><button type="button" class="navh" aria-expanded="true" aria-controls="ng-people">People &amp; moves<span class="cnt">4</span></button>
+        <div class="navg" id="ng-people"><div>
+          <a href="#/managers">Managers</a>
+          <a href="#/players">Players</a>
+          <a href="#/drafts">Drafts</a>
+          <a href="#/transactions">Trades &amp; waivers</a>
+        </div></div></div>
+      <div class="foot">
+        <div id="acct"></div>
+        <div id="source"></div>
+        <div class="footbtns"><button id="refresh" type="button">Refresh data</button><button id="theme" type="button">Theme</button></div>
+        <a href="#/look" class="footlink">Look &amp; feel</a> · <a href="#/data" class="footlink">Data &amp; import</a>
+      </div>
+      <div class="spots" aria-hidden="true"></div>
+    </nav>
+    <main id="main"><div class="bootskel"><div class="bootline"><span class="spinball" aria-hidden="true"></span><span id="progress" role="status">Loading…</span></div>
+      <div class="skel h1-sk"></div><div class="skel line-sk"></div>
+      <div class="skelgrid"><div class="skel tile-sk"></div><div class="skel tile-sk"></div><div class="skel tile-sk"></div><div class="skel tile-sk"></div></div>
+      <div class="skelstack"><div class="skel row-sk"></div><div class="skel row-sk"></div><div class="skel row-sk"></div><div class="skel row-sk"></div><div class="skel row-sk"></div></div></div></main>
+  </div>
+  <nav class="tabbar" aria-label="Quick links">
+    <a href="#/" data-tab=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg><span>Home</span></a>
+    <a href="#/live" data-tab="live"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm-1 4h2v5h-2zm0 6h2v2h-2z"/></svg><span>Live</span></a>
+    <a href="#/standings" data-tab="standings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10h3v10zm5.5 0V4h3v16zM16 20v-7h3v7z"/></svg><span>Standings</span></a>
+    <a href="#/block" data-tab="block"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10l-3-3m3 13H7l3 3"/></svg><span>Trades</span></a>
+    <button type="button" id="moreBtn" aria-controls="nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg><span>More</span></button>
+  </nav>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

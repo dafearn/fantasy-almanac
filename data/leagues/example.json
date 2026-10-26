@@ -1,0 +1,30 @@
+{
+  "_readme": "Copy this file to data/leagues/<your Sleeper league id>.json (the id of your league's first Sleeper season, or its newest one) and fill it in. Both parts are optional. See the Data & import page in the app.",
+  "legacy": {
+    "managerMap": { "Alex B.": "alexsleepername" },
+    "seasons": [
+      {
+        "season": 2021,
+        "platform": "ESPN",
+        "playoffTeams": 6,
+        "champion": "Alex B.",
+        "runnerUp": "Jordan",
+        "lastPlace": "Sam",
+        "standings": [
+          { "manager": "Alex B.", "team": "Team name that year", "wins": 10, "losses": 4, "ties": 0, "pf": 1650.4, "pa": 1500.2, "seed": 1, "rank": 1, "playoffs": true },
+          { "manager": "Jordan", "team": "Their team", "wins": 9, "losses": 5, "ties": 0, "pf": 1600.0, "pa": 1550.0, "seed": 2, "rank": 2, "playoffs": true }
+        ],
+        "games": [
+          { "week": 1, "type": "reg", "home": "Alex B.", "homePts": 120.5, "away": "Jordan", "awayPts": 110.2 },
+          { "week": 17, "type": "playoff", "home": "Alex B.", "homePts": 131.0, "away": "Jordan", "awayPts": 99.9 }
+        ]
+      }
+    ],
+    "hofSkip": [
+      { "manager": "Sam", "season": "2024", "note": "Took over a team mid-season, so the Hall of Fame starts their career the year after." }
+    ]
+  },
+  "rivalries": [
+    { "name": "The Brother-in-Law Bowl", "managers": ["alexsleepername", "jordansleepername"], "note": "Loser hosts Thanksgiving." }
+  ]
+}

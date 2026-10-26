@@ -1,0 +1,16 @@
+{
+  "name": "league-almanac",
+  "private": true,
+  "description": "A fantasy football almanac and clubhouse for any Sleeper league",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --no-warnings server/server.mjs",
+    "snapshot": "node scripts/snapshot.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0"
+  }
+}
